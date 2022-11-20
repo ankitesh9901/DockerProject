@@ -1,0 +1,32 @@
+---
+version: "2"
+services:
+  webapp:
+    build: webapp/.
+    depends_on:
+      - nginixserver
+    restart: always
+    networks:
+      - cloud
+
+  db:
+    build: psql/.
+    depends_on:
+      - nginixserver
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - cloud
+
+  nginixserver:
+    build: reverseproxy/.
+    ports:
+      - "8080:8080"
+    restart: always
+    networks:
+      - cloud
+
+networks:
+  cloud:
+   driver: bridge

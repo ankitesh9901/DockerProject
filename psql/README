@@ -1,0 +1,2 @@
+RUN below command to get into the database
+	docker exec -it <container_id> psql -U postgres world
